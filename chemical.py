@@ -133,7 +133,7 @@ polyatomic = {
     "ClO3-": {"symbol": "ClO3-", "name": "chlorate"},
     "ClO4-": {"symbol": "ClO4-", "name": "perchlorate"},
     "MnO4-": {"symbol": "MnO4-", "name": "permanganate"},
-    "C2O4^2-": {"symbol": "C2O4^2-", "name": "oxalate"},
+    # "C2O4^2-": {"symbol": "C2O4^2-", "name": "oxalate"},
     "CrO4^2-": {"symbol": "CrO4^2-", "name": "chromate"},
     "Cr2O7^2-": {"symbol": "Cr2O7^2-", "name": "dichromate"},
     "HSO4-": {"symbol": "HSO4-", "name": "hydrogen sulfate"},
