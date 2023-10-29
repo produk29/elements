@@ -1,3 +1,5 @@
+print("Hello this is a test to see if it auto updates im new to this "
+      "git hub thingy magiga")
 elements = {
     1: {"symbol": "H", "name": "Hydrogen"},
     2: {"symbol": "He", "name": "Helium"},
