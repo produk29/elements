@@ -142,4 +142,4 @@ if __name__ == "__main__":
         seconds = elapsed_time % 60
         time_taken = f"{minutes} minute(s) and {seconds} seconds"
 
-    print(f"{Fore.RESET}This ran for {time_taken}seconds")
+    print(f"{Fore.RESET}This ran for {time_taken}")
