@@ -1,4 +1,3 @@
-import random
 from functions import *
 import time
 from chemical import elements
@@ -13,8 +12,8 @@ def bold(type):
 def main():
     print(f"{Fore.GREEN}")
     batman()
-    print(f"{Fore.RESET}")
-    def check_element_name_and_symbol(name, symbol, missed_elements, user_answers, user_inputs, user_inputs_review):
+
+    def check_answer(name, symbol, missed_elements, user_answers, user_inputs, user_inputs_review):
         for key, value in elements.items():
             if value["name"] == name:
                 if value["symbol"] == symbol:
@@ -33,7 +32,7 @@ def main():
             try:
                 start_index = int(input(f"{Fore.RESET}Start from (1-{len(elements)}): "))
                 if start_index < 1 or start_index > len(elements):
-                    print(f"{Fore.RED}Enter a number 1 - {len(elements)}.")
+                    print(f"{Fore.RED}Enter a # between 1 - {len(elements)}.")
                     continue
                 break
             except ValueError:
@@ -51,13 +50,13 @@ def main():
 
         while True:
             order_preference = input(f"{Fore.RESET}In order or randomized: ").lower()
-            if order_preference not in ["order", "random", "1"]:
+            if order_preference not in ["order", "random", "1", "2", "o", "r"]:
                 print(f"{Fore.RED}Enter either 'order' or 'random'")
                 continue
             break
 
         element_keys = list(elements.keys())[start_index - 1:]
-        if order_preference == "random":
+        if order_preference in ["random", "2", "r"]:
             random.shuffle(element_keys)
         element_keys = element_keys[:num_elements]
 
@@ -75,7 +74,7 @@ def main():
             user_input_initial = input(f"{Fore.MAGENTA}{name}: ")
             user_input_initial = user_input_initial[0].upper() + user_input_initial[1:]  # Capitalize the first letter
             # question_end_time = time.time()
-            result = check_element_name_and_symbol(name, user_input_initial, missed_elements, user_answers, user_inputs,
+            result = check_answer(name, user_input_initial, missed_elements, user_answers, user_inputs,
                                                    user_inputs_review)
 
             if result is None:
@@ -117,7 +116,7 @@ def main():
                 print(f"Reviewing {element}:")
                 user_input2 = input(f"Enter the correct symbol for {element}: ")
                 user_input2 = user_input2[0].upper() + user_input2[1:]
-                check_element_name_and_symbol(element, user_input2, missed_elements, user_answers, user_inputs,
+                check_answer(element, user_input2, missed_elements, user_answers, user_inputs,
                                               user_inputs_review)
                 print(f"{Fore.RESET}-------------")
 
