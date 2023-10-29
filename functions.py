@@ -1,6 +1,12 @@
 import random
 import time
 from colorama import Fore
+from climage import color_to_flags, color_types, convert
+
+
+def image():
+    print(convert('batman-logo.jpeg', is_unicode=True,
+                  **color_to_flags(color_types.truecolor), width=55))
 
 def timing(start_time):
     question_end_time = time.time()  # Record the end time for the question
@@ -10,10 +16,11 @@ def timing(start_time):
     else:
         minutes = int(elapsed_time // 60)
         seconds = elapsed_time % 60
-        time_taken = f"{minutes} minute(s) and {seconds} seconds"
+        time_taken = f"{minutes} minute(s) and {round(seconds, 2)} seconds"
 
     print(f"{Fore.RESET}Time taken for the question: {time_taken}")
 def batman():
+    print(f"{Fore.GREEN}")
     print("""
 
 
@@ -42,6 +49,7 @@ def batman():
                  '$;.                  `$'                  .;$'
                     '.                  !                  .`
                     """)
+    print(f"{Fore.RESET}")
 def ascii_art():
     def eye():
         print(""""

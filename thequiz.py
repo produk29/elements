@@ -1,33 +1,39 @@
-from functions import *
-import time
-from chemical import elements
-from prettytable import PrettyTable
-from colorama import Fore
 import sys
+from prettytable import PrettyTable
+from chemical import elements
+from functions import *
+
+def bold(tpas):
+    sys.stdout.write("\033[1m" + tpas + "\033[0m")
 
 
-def bold(type):
-    sys.stdout.write("\033[1m" + type + "\033[0m")
+def check_answer(name, symbol, missed_elements, user_answers, user_inputs, user_inputs_review):
+    for key, value in elements.items():
+        if value["name"] == name:
+            if value["symbol"] == symbol:
+                return True
+            else:
+                missed_elements.append(name)
+                user_answers[name] = value["symbol"]
+                user_inputs[name] = symbol
+                user_inputs_review[name] = [value["symbol"], symbol]
+                return False
+    return None
+
+
+def print_missed_elements(missed_elements, user_answers, user_inputs):
+    table = PrettyTable()
+    table.field_names = [f"Element", f"{Fore.GREEN}Correct", f"{Fore.RED}Your answer{Fore.RESET}"]
+    table.title = f"{Fore.RED}Missed elements{Fore.RESET}"
+    for element in missed_elements:
+        table.add_row([element, user_answers[element], user_inputs[element]])
+    print(table)
+
 
 def main():
-    print(f"{Fore.GREEN}")
     batman()
-
-    def check_answer(name, symbol, missed_elements, user_answers, user_inputs, user_inputs_review):
-        for key, value in elements.items():
-            if value["name"] == name:
-                if value["symbol"] == symbol:
-                    return True
-                else:
-                    missed_elements.append(name)
-                    user_answers[name] = value["symbol"]
-                    user_inputs[name] = symbol
-                    user_inputs_review[name] = [value["symbol"], symbol]
-                    return False
-        return None
-
     while True:
-        start_time = time.time()
+        start_timing = time.time()
         while True:
             try:
                 start_index = int(input(f"{Fore.RESET}Start from (1-{len(elements)}): "))
@@ -68,14 +74,12 @@ def main():
 
         for key in element_keys:
             value = elements[key]
-            atomic = key
-            symbol = value["symbol"]
             name = value["name"]
             user_input_initial = input(f"{Fore.MAGENTA}{name}: ")
-            user_input_initial = user_input_initial[0].upper() + user_input_initial[1:]  # Capitalize the first letter
-            # question_end_time = time.time()
+            user_input_initial = user_input_initial[0].upper() + user_input_initial[1:]
+
             result = check_answer(name, user_input_initial, missed_elements, user_answers, user_inputs,
-                                                   user_inputs_review)
+                                  user_inputs_review)
 
             if result is None:
                 print(f"{Fore.RED}No element found with the name {name}.")
@@ -84,67 +88,52 @@ def main():
             elif result:
                 score += 1
 
-            # elapsed_time = round(question_end_time - start_time, 2)
-            # if elapsed_time < 60:
-            #     time_taken = f"{elapsed_time} seconds"
-            # else:
-            #     minutes = int(elapsed_time // 60)
-            #     seconds = elapsed_time % 60
-            #     time_taken = f"{minutes} minute(s) and {seconds} seconds"
-
-
             print(f"{Fore.RESET}-------------")
 
-
         if score * 100 / num_elements <= 70:
-
             bold(f"{Fore.RED}Score: {score}/{num_elements}\n")
         elif score * 100 / num_elements >= 80:
-
             bold(f"{Fore.GREEN}Score: {score}/{num_elements}\n")
         else:
             bold(f"{Fore.RESET}Score: {score}/{num_elements}\n")
-        # print(f"{Fore.RESET}Time taken for the question: {time_taken}")
-        timing(start_time)
+
+        timing(start_timing)
 
         try_again_or_review = input(
             f"Try again or Review missed questions? ({Fore.GREEN}try/review{Fore.RESET}): ").lower()
         if try_again_or_review in ["try", "try again"]:
+            if missed_elements:
+                print_missed_elements(missed_elements, user_answers, user_inputs)
+            else:
+                continue
             continue
-        elif try_again_or_review in ["review", "review missed", "missed", "question"]:
+        elif try_again_or_review in ["review", "review missed", "missed", "question", "2"]:
             for element in missed_elements:
-                print(f"Reviewing {element}:")
-                user_input2 = input(f"Enter the correct symbol for {element}: ")
-                user_input2 = user_input2[0].upper() + user_input2[1:]
-                check_answer(element, user_input2, missed_elements, user_answers, user_inputs,
-                                              user_inputs_review)
-                print(f"{Fore.RESET}-------------")
+                user_input2 = input(f"{Fore.RED}Correct symbol for {element}: ").capitalize()
 
-        if missed_elements:
-            table = PrettyTable()
-            table.field_names = ["Element", "Correct", "Your answer"]
-            for element in missed_elements:
-                table.add_row([element, user_answers[element], user_inputs[element]])
-            print("Missed elements:")
-            print(table)
+                if user_input2 == "break":
+                    break
+                check_answer(element, user_input2, missed_elements, user_answers, user_inputs, user_inputs_review)
 
-        else:
-            continue
+            if missed_elements:
+                print_missed_elements(missed_elements, user_answers, user_inputs)
+            else:
+                print(f"{Fore.GREEN} missed elements to review.")
+                continue
 
         if try_again_or_review.lower() == "break":
+            print("Thank you for playing!")
+
             break
         else:
-            print("Thank you for playing.")
             continue
 
 
 if __name__ == "__main__":
-    start_time = time.time()  # Record the start time
-
-    main()  # Run the main function
-
-    end_time = time.time()  # Record the end time
-    elapsed_time = round(end_time - start_time, 2)  # Calculate the elapsed time and round it to 2 decimal places
+    start_time = time.time()
+    main()
+    end_time = time.time()
+    elapsed_time = round(end_time - start_time, 2)
 
     if elapsed_time < 60:
         time_taken = f"{elapsed_time} seconds"
@@ -153,4 +142,4 @@ if __name__ == "__main__":
         seconds = elapsed_time % 60
         time_taken = f"{minutes} minute(s) and {seconds} seconds"
 
-    print(f"{Fore.RESET}It took you {time_taken} to take the quiz.")
+    print(f"{Fore.RESET}This ran for {time_taken}seconds")
