@@ -3,6 +3,7 @@ from prettytable import PrettyTable
 from chemical import elements
 from functions import *
 
+
 def bold(tpas):
     sys.stdout.write("\033[1m" + tpas + "\033[0m")
 
@@ -24,7 +25,7 @@ def check_answer(name, symbol, missed_elements, user_answers, user_inputs, user_
 def print_missed_elements(missed_elements, user_answers, user_inputs):
     table = PrettyTable()
     table.field_names = [f"Element", f"{Fore.GREEN}Correct", f"{Fore.RED}Your answer{Fore.RESET}"]
-    table.title = f"{Fore.RED}Missed elements{Fore.RESET}"
+    table.title = "{Fore.RESET}{Fore.RED}Missed elements{Fore.RESET}"
     for element in missed_elements:
         table.add_row([element, user_answers[element], user_inputs[element]])
     print(table)
@@ -109,7 +110,7 @@ def main():
             continue
         elif try_again_or_review in ["review", "review missed", "missed", "question", "2"]:
             for element in missed_elements:
-                user_input2 = input(f"{Fore.RED}Correct symbol for {element}: ").capitalize()
+                user_input2 = input(f"{Fore.RESET}{Fore.RED}Correct symbol for {element}: {Fore.RESET}").capitalize()
 
                 if user_input2 == "break":
                     break
