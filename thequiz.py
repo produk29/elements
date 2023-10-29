@@ -9,6 +9,7 @@ def bold(type):
     sys.stdout.write("\033[1m" + type + "\033[0m")
 
 def batman():
+
     print("""
     
     
