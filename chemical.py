@@ -129,7 +129,7 @@ polyatomic = {
     "CO3^2-": {"symbol": "CO3^2-", "name": "carbonate"},
     "HCO3-": {"symbol": "HCO3-", "name": "bicarbonate"},
     "PO4^3-": {"symbol": "PO4^3-", "name": "phosphate"},
-    "C2H3O2-": {"symbol": "C2H3O2-", "name": "acetate"},
+    "CH3C00-": {"symbol": "C2H3O2-", "name": "acetate"},
     "ClO3-": {"symbol": "ClO3-", "name": "chlorate"},
     "ClO4-": {"symbol": "ClO4-", "name": "perchlorate"},
     "MnO4-": {"symbol": "MnO4-", "name": "permanganate"},
