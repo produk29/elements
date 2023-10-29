@@ -215,7 +215,7 @@ def ascii_art():
     __ççç$$$$$$_çç$$$$__________
 
         """)
-
+def random_art():
     functions = [eye, smoka, hooka, mj, batman]
     random_func = random.choice(functions)
     random_func()
