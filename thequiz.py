@@ -106,6 +106,7 @@ def main():
             if missed_elements:
                 print_missed_elements(missed_elements, user_answers, user_inputs)
             else:
+                print(f"{Fore.GREEN} No missed elements to review.")
                 continue
             continue
         elif try_again_or_review in ["review", "review missed", "missed", "question", "2"]:
@@ -119,7 +120,7 @@ def main():
             if missed_elements:
                 print_missed_elements(missed_elements, user_answers, user_inputs)
             else:
-                print(f"{Fore.GREEN} missed elements to review.")
+                print(f"{Fore.GREEN} No missed elements to review.")
                 continue
 
         if try_again_or_review.lower() == "break":

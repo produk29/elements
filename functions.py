@@ -2,12 +2,9 @@ import random
 import time
 from colorama import Fore
 from climage import color_to_flags, color_types, convert
-
-
 def image():
     print(convert('batman-logo.jpeg', is_unicode=True,
                   **color_to_flags(color_types.truecolor), width=55))
-
 def timing(start_time):
     question_end_time = time.time()  # Record the end time for the question
     elapsed_time = round(question_end_time - start_time, 2)
@@ -215,7 +212,7 @@ def ascii_art():
     __ççç$$$$$$_çç$$$$__________
 
         """)
-def random_art():
+
     functions = [eye, smoka, hooka, mj, batman]
     random_func = random.choice(functions)
     random_func()
