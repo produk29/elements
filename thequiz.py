@@ -25,7 +25,7 @@ def check_answer(name, symbol, missed_elements, user_answers, user_inputs, user_
 def print_missed_elements(missed_elements, user_answers, user_inputs):
     table = PrettyTable()
     table.field_names = [f"Element", f"{Fore.GREEN}Correct", f"{Fore.RED}Your answer{Fore.RESET}"]
-    table.title = "{Fore.RESET}{Fore.RED}Missed elements{Fore.RESET}"
+    table.title = f"{Fore.RESET}{Fore.RED}Missed elements{Fore.RESET}"
     for element in missed_elements:
         table.add_row([element, user_answers[element], user_inputs[element]])
     print(table)
