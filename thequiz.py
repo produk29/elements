@@ -34,10 +34,12 @@ def print_missed_elements(missed_elements, user_answers, user_inputs):
 def main():
     batman()
     while True:
-        start_timing = time.time()
+
         while True:
             try:
                 start_index = int(input(f"{Fore.RESET}Start from (1-{len(elements)}): "))
+                if str(start_index) == "!=":
+                    break
                 if start_index < 1 or start_index > len(elements):
                     print(f"{Fore.RED}Enter a # between 1 - {len(elements)}.")
                     continue
@@ -60,6 +62,8 @@ def main():
             if order_preference not in ["order", "random", "1", "2", "o", "r"]:
                 print(f"{Fore.RED}Enter either 'order' or 'random'")
                 continue
+            elif order_preference in ["break", exit]:
+                break
             break
 
         element_keys = list(elements.keys())[start_index - 1:]
@@ -72,18 +76,23 @@ def main():
         user_answers = {}
         user_inputs = {}
         user_inputs_review = {}
-
+        start_timing = time.time()
         for key in element_keys:
             value = elements[key]
             name = value["name"]
-            user_input_initial = input(f"{Fore.MAGENTA}{name}: ")
-            user_input_initial = user_input_initial[0].upper() + user_input_initial[1:]
+            try:
+                user_input_initial = input(f"{Fore.MAGENTA}{name}: ")
+                user_input_initial = user_input_initial[0].upper() + user_input_initial[1:]
 
-            result = check_answer(name, user_input_initial, missed_elements, user_answers, user_inputs,
-                                  user_inputs_review)
+                result = check_answer(name, user_input_initial, missed_elements, user_answers, user_inputs,
+                                      user_inputs_review)
+            except IndexError:
+                continue
 
             if result is None:
                 print(f"{Fore.RED}No element found with the name {name}.")
+            elif not result:
+                print(f"{Fore.RED}You got this wrong{Fore.MAGENTA}")
             if user_input_initial.lower() == "break":
                 break
             elif result:
@@ -99,10 +108,11 @@ def main():
             bold(f"{Fore.RESET}Score: {score}/{num_elements}\n")
 
         timing(start_timing)
-
+        if score * 100 / num_elements == 100:
+            continue
         try_again_or_review = input(
             f"Try again or Review missed questions? ({Fore.GREEN}try/review{Fore.RESET}): ").lower()
-        if try_again_or_review in ["try", "try again"]:
+        if try_again_or_review in ["try", "try again", "t", "ta"]:
             if missed_elements:
                 print_missed_elements(missed_elements, user_answers, user_inputs)
             else:

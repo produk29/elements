@@ -46,7 +46,7 @@ elements = {
     # 45: {"symbol": "Rh", "name": "Rhodium"},
     # 46: {"symbol": "Pd", "name": "Palladium"},
     47: {"symbol": "Ag", "name": "Silver"},
-    # 48: {"symbol": "Cd", "name": "Cadmium"},
+    48: {"symbol": "Cd", "name": "Cadmium"},
     # 49: {"symbol": "In", "name": "Indium"},
     50: {"symbol": "Sn", "name": "Tin"},
     51: {"symbol": "Sb", "name": "Antimony"},
