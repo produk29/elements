@@ -3,7 +3,6 @@ from prettytable import PrettyTable
 from chemical import elements
 from functions import *
 
-
 def bold(tpas):
     sys.stdout.write("\033[1m" + tpas + "\033[0m")
 

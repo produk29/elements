@@ -15,9 +15,9 @@ def timing(start_time):
         seconds = elapsed_time % 60
         time_taken = f"{minutes} minute(s) and {round(seconds, 2)} seconds"
 
-    print(f"{Fore.RESET}Time taken for the question: {time_taken}")
+    print(f"{Fore.RESET}{time_taken}")
 def batman():
-    print(f"{Fore.GREEN}")
+    print(f"{Fore.BLACK}")
     print("""
 
 
