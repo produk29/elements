@@ -1,0 +1,1 @@
+First download the zip under the green button "code" it should say something like "Download zip", open the folder or zip "element-main", right click on "thequiz.py" click open with python launcher then the terminal with the batman logo is the right one and it should say "Start from (1-60):"
